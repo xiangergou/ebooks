@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "element-ui": "^2.13.2",
+    "leancloud-storage": "^4.6.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

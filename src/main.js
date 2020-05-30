@@ -5,6 +5,12 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+const AV = require('leancloud-storage')
+
+AV.init({
+  appId: 'AlWeYVtSToe0WIC9iWiVHLsQ-MdYXbMMI',
+  appKey: 'gC4mPTDAI5e5GriuORDNgED4'
+})
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
