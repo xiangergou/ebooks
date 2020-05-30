@@ -21,19 +21,19 @@
       <el-menu-item index="3"  class="_el-menu-item"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
     </el-menu>
     <!-- <div class="line"></div> -->
-    <content>
+    <main>
       <div class="content-text">
         <h1>留下</h1>
         <h2>晚来天欲雪 能饮一杯无</h2>
       </div>
-    </content>
+    </main>
 
   </div>
 </template>
 
 <script>
 export default {
-  name: 'header',
+  name: 'homeHeader',
   data () {
     return {
       activeIndex: '1',
@@ -60,7 +60,7 @@ export default {
     height: 40px;
     color: #fff;
   }
-  content{
+  main{
     width: 100%;
     height: 100%;
     display: flex;

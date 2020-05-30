@@ -2,23 +2,32 @@
   <div>
     <el-container>
       <el-header height="320px" class="header">
-        <Header></Header>
+        <HomeHeader></HomeHeader>
       </el-header>
       <el-container>
-        <el-aside width="200px">Aside</el-aside>
-        <el-main>Main</el-main>
+        <el-main>
+          <HomeContent></HomeContent>
+        </el-main>
+        <el-aside width="300px">
+          <HomeAside></HomeAside>
+        </el-aside>
       </el-container>
-      <el-footer>footer</el-footer>
+      <el-footer>
+        <HomeFooter />
+      </el-footer>
     </el-container>
   </div>
 </template>
 
 <script>
-import { Header } from './components'
+import { HomeHeader, HomeContent, HomeFooter, HomeAside } from './components'
 export default {
   name: 'home',
   components: {
-    Header
+    HomeHeader,
+    HomeContent,
+    HomeFooter,
+    HomeAside
   }
 }
 </script>
@@ -28,6 +37,7 @@ export default {
     background-color: #B3C0D1;
     color: #333;
     text-align: center;
+    padding: 0;
   }
 
   .el-aside {
