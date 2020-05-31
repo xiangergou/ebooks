@@ -12,6 +12,12 @@ export function getBooks (id) {
   return grapes.find()
 }
 
+export function getMenu (id) {
+  const grapes = new AV.Query('Category')
+  grapes.descending('createdAt').toJSON()
+  return grapes.find()
+}
+
 // function queryWine (data) {
 //   const grapes = new AV.Query('wine')
 //   grapes.descending('createdAt')

@@ -21,7 +21,6 @@
 
 <script>
 import { HomeHeader, HomeContent, HomeFooter, HomeAside } from './components'
-import { getBooks } from '@/service'
 export default {
   name: 'home',
   components: {
@@ -34,15 +33,6 @@ export default {
     return {
       booksList: []
     }
-  },
-  created () {
-    getBooks().then(res => {
-      console.log(JSON.parse(JSON.stringify(res)), 'res')
-      this.booksList.push(JSON.parse(JSON.stringify(res)))
-    })
-  },
-  mounted () {
-
   },
   methods: {
 
