@@ -19,5 +19,7 @@ export default {
 </script>
 
 <style scoped>
-
+.box-card{
+  width: 390px;
+}
 </style>

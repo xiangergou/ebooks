@@ -1,14 +1,14 @@
 <template>
   <div class="infinite-list-wrapper" style="overflow:auto">
-    <el-row :gutter="24" style="margin-bottom: 20px">
-      <el-col :span="24">
+    <el-row style="margin-bottom: 20px">
+      <el-col :span="23">
         <el-card shadow="hover">
           总是显示
         </el-card>
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="24" v-for="(k, v) in booksList" :key="v">
+      <el-col :span="23" v-for="(k, v) in booksList" :key="v">
         <el-card
           shadow="hover"
           v-infinite-scroll="load"  infinite-scroll-disabled="disabled"

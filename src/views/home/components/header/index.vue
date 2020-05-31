@@ -1,23 +1,26 @@
 <template>
   <div class="header-wrap">
-    <el-menu
-      :default-active="activeIndex"
-      class="el-menu"
-      mode="horizontal"
-      @select="handleSelect">
-      <el-menu-item index="1" class="_el-menu-item" >首页</el-menu-item>
-      <el-submenu :index="v+''" v-for="(k, v) in menuList" :key="v">
-        <template slot="title">{{k.OriginaName}}</template>
-        <el-menu-item :index="i+''" v-for="(item, i) in k.children" :key="i">{{item.name}}</el-menu-item>
-        <!-- <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu> -->
-      </el-submenu>
-      <el-menu-item index="3" class="_el-menu-item"><a href="https://www.ele.me" target="_blank">搜索</a></el-menu-item>
-    </el-menu>
+    <nav>
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu"
+        mode="horizontal"
+        show-timeout="200"
+        @select="handleSelect">
+        <el-menu-item index="1" class="_el-menu-item" >首页</el-menu-item>
+        <el-submenu :index="v+''" v-for="(k, v) in menuList" :key="v">
+          <template slot="title">{{k.OriginaName}}</template>
+          <el-menu-item :index="i+''" v-for="(item, i) in k.children" :key="i">{{item.name}}</el-menu-item>
+          <!-- <el-submenu index="2-4">
+            <template slot="title">选项4</template>
+            <el-menu-item index="2-4-1">选项1</el-menu-item>
+            <el-menu-item index="2-4-2">选项2</el-menu-item>
+            <el-menu-item index="2-4-3">选项3</el-menu-item>
+          </el-submenu> -->
+        </el-submenu>
+        <el-menu-item index="3" class="_el-menu-item"><a href="https://www.ele.me" target="_blank">搜索</a></el-menu-item>
+      </el-menu>
+    </nav>
     <main>
       <div class="content-text">
         <h1>留下</h1>
@@ -60,13 +63,19 @@ export default {
 .header-wrap{
   width: 100%;
   height: 100%;
-  .el-menu{
+  nav{
     width: 100%;
     position: fixed;
     top: 0;
     background: rgba(0, 0, 0, 0.4);
     height: 40px;
     color: #fff;
+    z-index: 99;
+    .el-menu{
+      width: 960px;
+      background: transparent;
+      margin: 0 auto;
+    }
   }
   main{
     width: 100%;
@@ -74,17 +83,24 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.2);
+    padding-top: 30px;
+    background: rgba(66,64,64,.2);
+    font-family: -apple-system,BlinkMacSystemFont,opensans,Optima,"Microsoft Yahei",sans-serif;
     .content-text{
       h1{
         color: #fff;
         text-transform: none;
         font-size: 40px;
+        font-family: inherit;
+        font-weight: normal;
       }
       h2{
         color: #fff;
+        font-family: inherit;
         margin-bottom: 30px;
         font-size: 25px;
+        letter-spacing: 1px;
+        font-weight: 400;
         letter-spacing: 1px;
       }
     }
