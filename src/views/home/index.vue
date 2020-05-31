@@ -8,7 +8,7 @@
         <el-main>
           <HomeContent></HomeContent>
         </el-main>
-        <el-aside width="300px">
+        <el-aside width="400px">
           <HomeAside></HomeAside>
         </el-aside>
       </el-container>
