@@ -19,6 +19,7 @@
           </el-submenu> -->
         </el-submenu>
         <el-menu-item index="3" class="_el-menu-item"><a href="https://www.ele.me" target="_blank">搜索</a></el-menu-item>
+        <el-menu-item index="4" class="_el-menu-item">投稿</el-menu-item>
       </el-menu>
     </nav>
     <main>
@@ -54,6 +55,9 @@ export default {
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+      if (+key === 4) {
+        this.$router.push({path: '/contribute'})
+      }
     }
   }
 }
