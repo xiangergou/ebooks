@@ -4,7 +4,7 @@
       <el-header height="320px" class="header">
         <HomeHeader></HomeHeader>
       </el-header>
-      <el-container>
+      <el-container width="960px">
         <el-main>
           <HomeContent></HomeContent>
         </el-main>
@@ -18,7 +18,6 @@
     </el-container>
   </div>
 </template>
-
 <script>
 import { HomeHeader, HomeContent, HomeFooter, HomeAside } from './components'
 export default {
@@ -33,6 +32,9 @@ export default {
     return {
       booksList: []
     }
+  },
+  created () {
+    console.log(window, document, 'ss')
   },
   methods: {
 

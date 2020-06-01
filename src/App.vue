@@ -5,8 +5,12 @@
 </template>
 
 <script>
+import effect from '@/utils/index'
 export default {
-  name: 'App'
+  name: 'App',
+  mounted () {
+    effect()
+  }
 }
 </script>
 

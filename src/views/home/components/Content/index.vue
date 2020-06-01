@@ -1,5 +1,5 @@
 <template>
-  <div class="infinite-list-wrapper" style="overflow:auto">
+  <div class="infinite-list-wrapper">
     <el-row style="margin-bottom: 20px" v-if="showGuide">
       <el-col :span="23">
         <el-card shadow="hover">
@@ -36,7 +36,7 @@
              2020年5月31日  1条评论 4人点赞  三秋
           </div>
         </el-card>
-        <el-card
+        <!-- <el-card
           shadow="hover"
           v-infinite-scroll="load"  infinite-scroll-disabled="disabled"
           v-for="(k, v) in booksList" :key="v"
@@ -57,7 +57,7 @@
               </div>
             </el-col>
           </el-row>
-        </el-card>
+        </el-card> -->
       </el-col>
     </el-row>
     <p v-if="loading">加载中...</p>
@@ -131,7 +131,6 @@ export default {
       padding: 4px 6px;
       font-size: 12px;
       font-weight: 700;
-      height: 14px;
       line-height: 14px;
       color: #fff;
       vertical-align: baseline;
