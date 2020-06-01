@@ -97,11 +97,11 @@ export default {
         font-size: 40px;
         font-family: inherit;
         font-weight: normal;
+        margin-bottom: 10px;
       }
       h2{
         color: #fff;
         font-family: inherit;
-        margin-bottom: 30px;
         font-size: 25px;
         letter-spacing: 1px;
         font-weight: 400;
