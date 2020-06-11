@@ -68,7 +68,6 @@
               class="iconfont el-icon-s-claim" />
           </el-input>
         </el-form-item>
-
         <el-form-item class="login_handle">
           <el-button
             :loading="loading"
@@ -84,11 +83,9 @@
         </el-form-item>
       </el-form>
     </article>
-
   </div>
 </template>
 <script>
-// import { validateMobile } from '@/utils/validate'
 
 export default {
   name: 'Login',
@@ -127,10 +124,12 @@ export default {
       },
       loginRules: {
         username: [
-          { required: true, trigger: 'blur', validator: validateAccount }
+          { required: true, trigger: 'blur', validator: validateAccount },
+          { min: 3, message: '最少3个字符', trigger: 'blur' }
         ],
         password: [
-          { required: true, trigger: 'blur', validator: validatePass }
+          { required: true, trigger: 'blur', validator: validatePass },
+          { min: 3, message: '最少3个字符', trigger: 'blur' }
         ],
         checkPass: [
           { required: true, trigger: 'blur', validator: validatePass2 }
@@ -149,7 +148,8 @@ export default {
           this.$store.dispatch(type, this.loginForm).then((res) => {
             console.log(res)
             this.loading = false
-            // this.$router.push({ path: '/' })
+            console.log('fuck')
+            this.$router.push({ path: '/' })
           }).catch((err) => {
             console.log(err)
             this.$message.error(err.rawMessage)

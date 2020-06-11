@@ -60,8 +60,15 @@
         </el-card> -->
       </el-col>
     </el-row>
+
     <p v-if="loading">加载中...</p>
     <p v-if="noMore">没有更多了</p>
+
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="1000">
+    </el-pagination>
   </div>
 </template>
 

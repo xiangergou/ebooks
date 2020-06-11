@@ -12,13 +12,14 @@ import { logIn, signUp } from '@/service/user'
 const user = {
   state: {
     // sessionId: getSessionId(),
+    userInfo: {},
     name: '',
     avatar: '',
     roles: []
   },
   mutations: {
-    SET_SESSIONID: (state, sessionId) => {
-      state.sessionId = sessionId
+    SET_USERINFO: (state, userInfo) => {
+      state.userInfo = userInfo
     },
     SET_NAME: (state, name) => {
       state.name = name
@@ -40,30 +41,13 @@ const user = {
       console.log(userInfo, 'userInfo')
       return new Promise((resolve, reject) => {
         logIn(userInfo).then(res => {
-          resolve(JSON.parse(JSON.stringify(res)))
+          const data = JSON.parse(JSON.stringify(res))
+          commit('SET_USERINFO', data)
+          resolve(data)
         }).catch(err => {
           reject(JSON.parse(JSON.stringify(err)))
         })
       })
-      // return logIn(userInfo)
-      // return new Promise((resolve, reject) => {
-      //   AV.User.logIn(username, 'cat!@#123').then((user) => {
-      //     // 登录成功
-      //   }, (error) => {
-      //     // 登录失败（可能是密码错误）
-      //   })
-      //   // loginApi.login({
-      //   //   mobile,
-      //   //   password: userInfo.password
-      //   // }).then(response => {
-      //   //   const data = response.data.data
-      //   //   setSessionId(data.sessionId)
-      //   //   commit('SET_SESSIONID', data.sessionId)
-      //   //   resolve(data)
-      //   // }).catch(error => {
-      //   //   reject(error)
-      //   // })
-      // })
     },
 
     SignUp ({ commit }, userInfo) {

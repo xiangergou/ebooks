@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="background: rgb(242,242,242)">
     <el-container>
       <el-header height="320px" class="header">
         <HomeHeader></HomeHeader>
@@ -9,7 +9,7 @@
           <HomeContent></HomeContent>
         </el-main>
         <el-aside width="400px">
-          <HomeAside></HomeAside>
+          <HomeAside :userInfo="userInfo"></HomeAside>
         </el-aside>
       </el-container>
       <el-footer>
@@ -20,6 +20,9 @@
 </template>
 <script>
 import { HomeHeader, HomeContent, HomeFooter, HomeAside } from './components'
+import effect from '@/utils/index'
+import AV from 'leancloud-storage'
+
 export default {
   name: 'home',
   components: {
@@ -30,34 +33,42 @@ export default {
   },
   data () {
     return {
-      booksList: []
+      booksList: [],
+      userInfo: {}
     }
   },
   created () {
-    console.log(window, document, 'ss')
+    effect()
+    this.getUserInfo()
   },
   methods: {
-
+    getUserInfo () {
+      const currentUser = AV.User.current()
+      if (currentUser) {
+        this.userInfo = JSON.parse(JSON.stringify(currentUser))
+        console.log(currentUser, 'currentUser')
+      // 跳到首页
+      } else {
+      // 显示注册或登录页面
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
 .el-header, .el-footer {
-    background-color: #B3C0D1;
     color: #333;
     text-align: center;
     padding: 0;
   }
 
   .el-aside {
-    background-color: #D3DCE6;
     color: #333;
     text-align: center;
   }
 
   .el-main {
-    background-color: #E9EEF3;
     color: #333;
     text-align: center;
   }
@@ -74,9 +85,18 @@ export default {
   .el-container:nth-child(7) .el-aside {
     line-height: 320px;
   }
+  .header::before{
+    width: 100%;
+    height: 320px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background:rgba(255,255,255, 0.2);
+  }
   .header{
     padding: 0;
-    background: url('https://ae01.alicdn.com/kf/He146f53d314a4fb9a7a4eded11f0ab698.jpeg');
+    background: url('https://img.alicdn.com/tfs/TB1zfikJ8r0gK0jSZFnXXbRRXXa-5000-3272.jpg');
     background-size: cover;
     background-position: center center;
   }

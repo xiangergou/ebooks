@@ -8,18 +8,21 @@
         show-timeout="200"
         @select="handleSelect">
         <el-menu-item index="1" class="_el-menu-item" >首页</el-menu-item>
-        <el-submenu :index="v+''" v-for="(k, v) in menuList" :key="v">
+        <el-submenu :index="k.objectId + ''" v-for="(k, v) in menuList" :key="v">
           <template slot="title">{{k.OriginaName}}</template>
-          <el-menu-item :index="i+''" v-for="(item, i) in k.children" :key="i">{{item.name}}</el-menu-item>
-          <!-- <el-submenu index="2-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="2-4-1">选项1</el-menu-item>
-            <el-menu-item index="2-4-2">选项2</el-menu-item>
-            <el-menu-item index="2-4-3">选项3</el-menu-item>
-          </el-submenu> -->
+          <el-menu-item :index="item.id + ''" v-for="(item, i) in k.children" :key="i" @click="menuItemClick(k.OriginaName, item.name)">{{item.name}}</el-menu-item>
         </el-submenu>
-        <el-menu-item index="3" class="_el-menu-item"><a href="https://www.ele.me" target="_blank">搜索</a></el-menu-item>
-        <el-menu-item index="4" class="_el-menu-item">投稿</el-menu-item>
+
+        <el-submenu index="5" v-if="userInfo.username" style="float:right">
+          <template slot="title">{{userInfo.username}}</template>
+          <el-menu-item index="5-1" >个人信息</el-menu-item>
+          <el-menu-item index="4" class="_el-menu-item">投稿</el-menu-item>
+          <el-menu-item index="5-1" @click="logout">登出</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="5" class="_el-menu-item" v-else style="float:right">未登录</el-menu-item>
+        <el-menu-item index="3" class="_el-menu-item" style="float:right;">
+            <el-input v-model="keyWord" placeholder="请输入内容" size="mini" @keyup.enter.native="handleToSearch" />
+        </el-menu-item>
       </el-menu>
     </nav>
     <main>
@@ -32,12 +35,16 @@
 </template>
 
 <script>
-import { getMenu } from '@/service'
+import { getMenu, doSearch } from '@/service'
+import AV from 'leancloud-storage'
 
 export default {
   name: 'homeHeader',
   data () {
     return {
+      keyWord: '',
+      avatar: 'https://img.alicdn.com/tfs/TB1K8CryEz1gK0jSZLeXXb9kVXa-400-400.jpg',
+      userInfo: {},
       activeIndex: '1',
       activeIndex2: '1',
       menuList: []
@@ -51,6 +58,7 @@ export default {
       this.menuList = data
       // this.booksList.push(...data)
     })
+    this.getUserInfo()
   },
   methods: {
     handleSelect (key, keyPath) {
@@ -58,6 +66,30 @@ export default {
       if (+key === 4) {
         this.$router.push({path: '/contribute'})
       }
+    },
+    getUserInfo () {
+      const currentUser = AV.User.current()
+      if (currentUser) {
+        this.userInfo = JSON.parse(JSON.stringify(currentUser))
+        console.log(currentUser, 'currentUser')
+      // 跳到首页
+      } else {
+      // 显示注册或登录页面
+      }
+    },
+    logout () {
+      AV.User.logOut().then(() => {
+        this.userInfo = {}
+      })
+    },
+    menuItemClick (e, k) {
+      console.log(e, k, 'e')
+    },
+    handleToSearch () {
+      console.log(this.keyWord)
+      doSearch(this.keyWord).then(res => {
+        console.log(res, 'res')
+      })
     }
   }
 }
@@ -76,7 +108,8 @@ export default {
     color: #fff;
     z-index: 99;
     .el-menu{
-      width: 960px;
+      max-width: 1180px;
+      min-width: 960px;
       background: transparent;
       margin: 0 auto;
     }
@@ -89,7 +122,6 @@ export default {
     justify-content: center;
     padding-top: 30px;
     background: rgba(66,64,64,.2);
-    font-family: -apple-system,BlinkMacSystemFont,opensans,Optima,"Microsoft Yahei",sans-serif;
     .content-text{
       h1{
         color: #fff;
@@ -97,15 +129,17 @@ export default {
         font-size: 40px;
         font-family: inherit;
         font-weight: normal;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        font-family: PingFangSC-Regular;
       }
       h2{
         color: #fff;
         font-family: inherit;
         font-size: 25px;
         letter-spacing: 1px;
-        font-weight: 400;
+        font-weight: 300;
         letter-spacing: 1px;
+        font-family: FangSong;
       }
     }
   }
@@ -149,5 +183,8 @@ export default {
 }
 .el-menu--horizontal>.el-submenu:hover .el-submenu__title{
   color: #303133
+}
+.el-menu-item *{
+  vertical-align: inherit
 }
 </style>

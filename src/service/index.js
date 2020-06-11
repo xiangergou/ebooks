@@ -7,15 +7,23 @@ import AV from 'leancloud-storage'
 // console.log(user)
 
 export function getBooks (id) {
-  const grapes = new AV.Query('Books')
-  grapes.descending('createdAt').toJSON()
-  return grapes.find()
+  const data = new AV.Query('Books')
+  data.descending('createdAt').toJSON()
+  return data.find()
 }
 
 export function getMenu (id) {
-  const grapes = new AV.Query('Category')
-  grapes.descending('createdAt').toJSON()
-  return grapes.find()
+  const data = new AV.Query('Category')
+  data.descending('createdAt').toJSON()
+  return data.find()
+}
+
+export function doSearch (keyword) {
+  const query = new AV.Query('Books')
+  // 相当于 SQL 中的 title LIKE '%lunch%'
+  query.contains('title', keyword)
+
+  return query.find()
 }
 
 // function queryWine (data) {
