@@ -4,7 +4,7 @@
       <el-header height="320px" class="header">
         <HomeHeader></HomeHeader>
       </el-header>
-      <el-container width="960px">
+      <el-container>
         <el-main>
           <HomeContent></HomeContent>
         </el-main>

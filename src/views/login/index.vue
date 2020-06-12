@@ -179,6 +179,7 @@ export default {
   background:rgba(255,255,255, 0.2);
 }
 .login-container {
+  min-width: 960px;
   width: 100%;
   height: 100%;
   position: relative;
@@ -186,7 +187,7 @@ export default {
   background-size: cover;
   article{
     float: right;
-    margin: 200px 100px;
+    margin: 20vh 20vw 0 0;
     display: flex;
     aside{
       max-width: 500px;

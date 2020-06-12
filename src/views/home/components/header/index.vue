@@ -19,7 +19,7 @@
           <el-menu-item index="4" class="_el-menu-item">投稿</el-menu-item>
           <el-menu-item index="5-1" @click="logout">登出</el-menu-item>
         </el-submenu>
-        <el-menu-item index="5" class="_el-menu-item" v-else style="float:right">未登录</el-menu-item>
+        <el-menu-item index="5" class="_el-menu-item" v-else style="float:right" @click="changeType">未登录</el-menu-item>
         <el-menu-item index="3" class="_el-menu-item" style="float:right;">
             <el-input v-model="keyWord" placeholder="请输入内容" size="mini" @keyup.enter.native="handleToSearch" />
         </el-menu-item>
@@ -37,6 +37,7 @@
 <script>
 import { getMenu, doSearch } from '@/service'
 import AV from 'leancloud-storage'
+import Bus from '@/utils/bus'
 
 export default {
   name: 'homeHeader',
@@ -90,6 +91,9 @@ export default {
       doSearch(this.keyWord).then(res => {
         console.log(res, 'res')
       })
+    },
+    changeType () {
+      Bus.$emit('typeChage', '子组件向兄弟组件传值')
     }
   }
 }
