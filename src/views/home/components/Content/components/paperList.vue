@@ -2,7 +2,7 @@
  * @Description:
  * @LastEditors: liuxia
  * @Date: 2020-06-11 21:41:35
- * @LastEditTime: 2020-06-12 14:08:16
+ * @LastEditTime: 2020-06-12 15:10:07
 -->
 <template>
   <div>
@@ -100,7 +100,7 @@
         <el-pagination
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-          :current-page="currentPage4"
+          :current-page="1"
           :page-sizes="[100, 200, 300, 400]"
           :page-size="100"
           layout="total, sizes, prev, pager, next, jumper"

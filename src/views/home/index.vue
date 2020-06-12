@@ -9,17 +9,20 @@
           <HomeContent></HomeContent>
         </el-main>
         <el-aside width="400px">
-          <HomeAside :userInfo="userInfo"></HomeAside>
+          <HomeAside :userInfo="userInfo" @showDrawer="showDrawer"></HomeAside>
         </el-aside>
       </el-container>
       <el-footer>
         <HomeFooter />
       </el-footer>
     </el-container>
+    <!-- 个人中心 -->
+    <UserInfo :showUser.sync="showUser"/>
   </div>
 </template>
 <script>
 import { HomeHeader, HomeContent, HomeFooter, HomeAside } from './components'
+import UserInfo from '../user/info'
 import effect from '@/utils/index'
 import AV from 'leancloud-storage'
 
@@ -29,12 +32,14 @@ export default {
     HomeHeader,
     HomeContent,
     HomeFooter,
-    HomeAside
+    HomeAside,
+    UserInfo
   },
   data () {
     return {
       booksList: [],
-      userInfo: {}
+      userInfo: {},
+      showUser: true
     }
   },
   created () {
@@ -42,6 +47,9 @@ export default {
     this.getUserInfo()
   },
   methods: {
+    showDrawer (flag = true) {
+      this.showUser = flag
+    },
     getUserInfo () {
       const currentUser = AV.User.current()
       if (currentUser) {

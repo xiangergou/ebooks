@@ -1,7 +1,7 @@
 <template>
   <div class="aside-box">
     <el-card class="box-card" shadow="hover">
-      <div class="header">
+      <div class="header" @click="showDrawer">
         <img src="https://img.alicdn.com/tfs/TB1K8CryEz1gK0jSZLeXXb9kVXa-400-400.jpg" alt="">
       </div>
       <aside>
@@ -38,6 +38,11 @@ export default {
   data () {
     return {
       codeList: [{url: '', title: '微信'}, {url: '', title: '支付宝'}]
+    }
+  },
+  methods: {
+    showDrawer () {
+      this.$emit('showDrawer')
     }
   }
 }
