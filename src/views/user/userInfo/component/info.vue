@@ -1,0 +1,54 @@
+<template>
+  <div class="userInfo-wrap">
+    <aside>
+      <header>
+        <h1>个人中心</h1>
+        <el-avatar size="large" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
+        <h2>落白</h2>
+      </header>
+      <el-tabs tab-position="right">
+        <el-tab-pane label="基本资料"></el-tab-pane>
+        <el-tab-pane label="我的分享"></el-tab-pane>
+        <el-tab-pane label="投稿"></el-tab-pane>
+      </el-tabs>
+    </aside>
+    <main>
+      表单
+    </main>
+  </div>
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style scoped lang="scss">
+.userInfo-wrap{
+  width: 100%;
+  display: flex;
+  height: 100%;
+  aside{
+    width: 160px;
+    height: 100%;
+    box-shadow: -2px 0px 9px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+  }
+}
+
+</style>
+<style>
+.el-tabs--right .el-tabs__header.is-right {
+  float: none;
+  margin-left: 1px;
+}
+.el-tabs__item.is-active {
+  color: rgb(67, 175, 148);
+}
+.el-tabs__active-bar{
+  background-color: rgb(67, 175, 148);
+}
+.el-tabs__item:hover{
+  color: rgb(67, 175, 148);
+}
+</style>
