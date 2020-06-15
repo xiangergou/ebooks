@@ -22,7 +22,7 @@
 </template>
 <script>
 import { HomeHeader, HomeContent, HomeFooter, HomeAside } from './components'
-import UserInfo from '../user/info'
+import UserInfo from '../user/userInfo'
 import effect from '@/utils/index'
 import AV from 'leancloud-storage'
 import { getMenu } from '@/service'
@@ -115,7 +115,7 @@ export default {
   .el-container:nth-child(7) .el-aside {
     line-height: 320px;
   }
-  .header::before{
+  .header::after{
     width: 100%;
     height: 320px;
     content: "";
@@ -125,6 +125,7 @@ export default {
     background:rgba(255,255,255, 0.2);
   }
   .header{
+    position: relative;
     padding: 0;
     background: url('https://img.alicdn.com/tfs/TB1zfikJ8r0gK0jSZFnXXbRRXXa-5000-3272.jpg');
     background-size: cover;
