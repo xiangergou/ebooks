@@ -8,9 +8,17 @@
         show-timeout="200"
         @select="handleSelect">
         <el-menu-item index="1" class="_el-menu-item" >首页</el-menu-item>
-        <el-submenu :index="k.objectId + ''" v-for="(k, v) in menuList" :key="v">
-          <template slot="title">{{k.OriginaName}}</template>
-          <el-menu-item :index="item.id + ''" v-for="(item, i) in k.children" :key="i" @click="menuItemClick(k.OriginaName, item.name)">{{item.name}}</el-menu-item>
+
+        <el-submenu :index="k.objectId + ''" v-for="(k, v) in menu" :key="v">
+          <template slot="title">{{k.title}}</template>
+          <span v-for="(item, i) in k.subs" :key="i">
+            <el-submenu :index="k.objectId + ''"  v-if="item.subs && item.subs.length > 0">
+              <template slot="title">{{item.title}}</template>
+              <el-menu-item v-for="(kk, vv) in item.subs" :key="vv" :index="k.objectId + ''">{{kk.title}}</el-menu-item>
+            </el-submenu>
+
+            <el-menu-item :index="item.objectId + ''"   @click="menuItemClick(k, item)" v-else>{{item.title}}</el-menu-item>
+          </span>
         </el-submenu>
 
         <el-submenu index="5" v-if="userInfo.username" style="float:right">
@@ -35,7 +43,7 @@
 </template>
 
 <script>
-import { getMenu, doSearch } from '@/service'
+import { doSearch } from '@/service'
 import AV from 'leancloud-storage'
 import Bus from '@/utils/bus'
 
@@ -51,22 +59,22 @@ export default {
       menuList: []
     }
   },
+  props: {
+    menu: {
+      type: Array,
+      required: false,
+      default: () => []
+    }
+  },
   created () {
-    getMenu().then(res => {
-      console.log(JSON.parse(JSON.stringify(res)), 'res')
-      const data = JSON.parse(JSON.stringify(res))
-      console.log(data, 'data')
-      this.menuList = data
-      // this.booksList.push(...data)
-    })
-    this.getUserInfo()
   },
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
-      if (+key === 4) {
-        this.$router.push({path: '/contribute'})
-      }
+      // if (+key === 4) {
+      //   this.$router.push({path: '/contribute'})
+      // }
+      Bus.$emit('menuSelect', '子组件向兄弟组件传值')
     },
     getUserInfo () {
       const currentUser = AV.User.current()
