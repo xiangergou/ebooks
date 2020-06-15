@@ -5,12 +5,11 @@
         :default-active="activeIndex"
         class="el-menu"
         mode="horizontal"
-        show-timeout="200"
-        @select="handleSelect">
+        show-timeout="200">
         <el-menu-item index="1" class="_el-menu-item" >首页</el-menu-item>
         <el-submenu :index="k.objectId + ''" v-for="(k, v) in menuList" :key="v">
           <template slot="title">{{k.OriginaName}}</template>
-          <el-menu-item :index="item.id + ''" v-for="(item, i) in k.children" :key="i" @click="menuItemClick(k.OriginaName, item.name)">{{item.name}}</el-menu-item>
+          <el-menu-item :index="item.id + ''" v-for="(item, i) in k.children" :key="i" @click="menuItemClick(k, item)">{{item.name}}</el-menu-item>
         </el-submenu>
 
         <el-submenu index="5" v-if="userInfo.username" style="float:right">
@@ -19,7 +18,7 @@
           <el-menu-item index="4" class="_el-menu-item">投稿</el-menu-item>
           <el-menu-item index="5-1" @click="logout">登出</el-menu-item>
         </el-submenu>
-        <el-menu-item index="5" class="_el-menu-item" v-else style="float:right" @click="changeType">未登录</el-menu-item>
+        <el-menu-item index="5" class="_el-menu-item" v-else style="float:right" @click="login">未登录</el-menu-item>
         <el-menu-item index="3" class="_el-menu-item" style="float:right;">
             <el-input v-model="keyWord" placeholder="请输入内容" size="mini" @keyup.enter.native="handleToSearch" />
         </el-menu-item>
@@ -77,6 +76,9 @@ export default {
       } else {
       // 显示注册或登录页面
       }
+    },
+    login () {
+      this.$router.push('/login')
     },
     logout () {
       AV.User.logOut().then(() => {

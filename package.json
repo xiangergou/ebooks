@@ -13,6 +13,7 @@
   "dependencies": {
     "element-ui": "^2.13.2",
     "leancloud-storage": "^4.6.0",
+    "valine": "^1.4.14",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.4.0"

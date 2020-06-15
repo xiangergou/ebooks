@@ -39,7 +39,7 @@ export default {
     return {
       booksList: [],
       userInfo: {},
-      showUser: true
+      showUser: false
     }
   },
   created () {
@@ -102,6 +102,11 @@ export default {
     left: 0;
     background:rgba(255,255,255, 0.2);
   }
+
+.gray {
+  filter: grayscale(100%);
+  filter: gray;
+}
   .header{
     position: relative;
     padding: 0;
