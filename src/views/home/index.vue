@@ -2,7 +2,7 @@
   <div style="background: rgb(242,242,242)">
     <el-container>
       <el-header height="320px" class="header">
-        <HomeHeader></HomeHeader>
+        <HomeHeader :menu="menu" />
       </el-header>
       <el-container>
         <el-main>
@@ -25,6 +25,7 @@ import { HomeHeader, HomeContent, HomeFooter, HomeAside } from './components'
 import UserInfo from '../user/userInfo'
 import effect from '@/utils/index'
 import AV from 'leancloud-storage'
+import { getMenu } from '@/service'
 
 export default {
   name: 'home',
@@ -39,16 +40,37 @@ export default {
     return {
       booksList: [],
       userInfo: {},
-      showUser: false
+      showUser: true,
+      menu: []
     }
   },
   created () {
     effect()
     this.getUserInfo()
+
+    getMenu().then(res => {
+      const data = JSON.parse(JSON.stringify(res))
+      this.menu = this.filterArray(data)
+    })
   },
   methods: {
     showDrawer (flag = true) {
       this.showUser = flag
+    },
+    filterArray (data, pid = '') {
+      var tree = []
+      var temp
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].pid === pid) {
+          var obj = data[i]
+          temp = this.filterArray(data, data[i].objectId)
+          if (temp.length > 0) {
+            obj.subs = temp
+          }
+          tree.push(obj)
+        }
+      }
+      return tree
     },
     getUserInfo () {
       const currentUser = AV.User.current()

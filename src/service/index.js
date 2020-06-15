@@ -13,7 +13,7 @@ export function getBooks (id) {
 }
 
 export function getMenu (id) {
-  const data = new AV.Query('Category')
+  const data = new AV.Query('MenuList')
   data.descending('createdAt').toJSON()
   return data.find()
 }
