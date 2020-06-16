@@ -2,7 +2,7 @@
  * @Author: liuxia
  * @Date: 2019-01-11 16:01:32
  * @Last Modified by: liuxia
- * @Last Modified time: 2019-01-14 21:13:43
+ * @Last Modified time: 2020-06-13 14:12:47
  */
 
 <template>
@@ -116,7 +116,7 @@ export default {
       }
     }
     return {
-      type: 0, // 0 登录 1 注册
+      type: 1, // 0 登录 1 注册
       loginForm: {
         username: 'yun',
         password: '1',
