@@ -9,12 +9,12 @@
         @select="handleSelect">
         <el-menu-item index="1" class="_el-menu-item" >首页</el-menu-item>
 
-        <el-submenu :index="k.objectId + ''" v-for="(k, v) in menu" :key="v">
-          <template slot="title">{{k.title}}</template>
-          <span v-for="(item, i) in k.subs" :key="i">
-            <el-submenu :index="k.objectId + ''"  v-if="item.subs && item.subs.length > 0">
+        <el-submenu :index="k.objectId + ''" v-for="k in menu" :key="k.objectId">
+          <template slot="title"> {{k.title}} </template>
+          <span v-for="item in k.subs" :key="item.objectId">
+            <el-submenu :index="item.objectId + ''"  v-if="item.subs && item.subs.length > 0" :key="item.objectId">
               <template slot="title">{{item.title}}</template>
-              <el-menu-item v-for="(kk, vv) in item.subs" :key="vv" :index="k.objectId + ''">{{kk.title}}</el-menu-item>
+              <el-menu-item v-for="kk in item.subs" :key="kk.objectId" :index="kk.objectId + ''">{{kk.title}}</el-menu-item>
             </el-submenu>
 
             <el-menu-item :index="item.objectId + ''"   @click="menuItemClick(k, item)" v-else>{{item.title}}</el-menu-item>

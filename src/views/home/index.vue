@@ -40,7 +40,7 @@ export default {
     return {
       booksList: [],
       userInfo: {},
-      showUser: true,
+      showUser: false,
       menu: []
     }
   },
@@ -51,6 +51,7 @@ export default {
     getMenu().then(res => {
       const data = JSON.parse(JSON.stringify(res))
       this.menu = this.filterArray(data)
+      console.log(this.menu, 'this.menu')
     })
   },
   methods: {
