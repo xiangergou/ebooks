@@ -13,7 +13,7 @@
           <span v-for="item in k.subs" :key="item.objectId">
             <el-submenu :index="item.objectId + ''"  v-if="item.subs && item.subs.length > 0" :key="item.objectId">
               <template slot="title">{{item.title}}</template>
-              <el-menu-item v-for="kk in item.subs" :key="kk.objectId" :index="kk.objectId + ''">{{kk.title}}</el-menu-item>
+              <el-menu-item v-for="kk in item.subs" :key="kk.objectId" :index="kk.objectId + ''" @click="menuItemClick(k, item, kk)">{{kk.title}}</el-menu-item>
             </el-submenu>
 
             <el-menu-item :index="item.objectId + ''"   @click="menuItemClick(k, item)" v-else>{{item.title}}</el-menu-item>
@@ -68,8 +68,8 @@ export default {
   created () {
   },
   methods: {
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
+    handleSelect (key, v, item) {
+      console.log(key, v, item)
       // if (+key === 4) {
       //   this.$router.push({path: '/contribute'})
       // }
@@ -93,8 +93,17 @@ export default {
         this.userInfo = {}
       })
     },
-    menuItemClick (e, k) {
-      console.log(e, k, 'e')
+    menuItemClick (e, k, item) {
+      const data = Array.prototype.slice.apply(arguments)
+      console.log(data, 'e')
+      data.map(k => {
+        return {
+          title: k.title,
+          id: k.objectId
+        }
+      })
+      // const menu = []
+      // const argument = argum
     },
     handleToSearch () {
       console.log(this.keyWord)
