@@ -40,7 +40,7 @@ export default {
     return {
       booksList: [],
       userInfo: {},
-      showUser: false,
+      showUser: true,
       menu: []
     }
   },
