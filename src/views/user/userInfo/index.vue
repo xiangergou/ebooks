@@ -11,7 +11,7 @@
       :visible.sync="showUser"
       :before-close="handleClose"
       :modal="false"
-      size="30%"
+      size="70%"
       :with-header="false">
       <info />
     </el-drawer>

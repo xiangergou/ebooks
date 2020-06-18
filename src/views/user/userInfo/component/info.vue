@@ -3,24 +3,47 @@
     <aside>
       <header>
         <h1>个人中心</h1>
-        <el-avatar size="large" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
+        <el-avatar size="large" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" class="avatar"></el-avatar>
         <h2>落白</h2>
       </header>
-      <el-tabs tab-position="right">
-        <el-tab-pane label="基本资料"></el-tab-pane>
-        <el-tab-pane label="我的分享"></el-tab-pane>
-        <el-tab-pane label="投稿"></el-tab-pane>
+      <el-tabs tab-position="right"  @tab-click="handleClick">
+        <el-tab-pane label="基本资料">
+        </el-tab-pane>
+        <el-tab-pane label="我的分享">
+        </el-tab-pane>
+        <el-tab-pane label="投稿">
+        </el-tab-pane>
       </el-tabs>
     </aside>
     <main>
-      表单
+      <component v-bind:is="activeComponent"></component>
     </main>
   </div>
 </template>
 
 <script>
+import basic from './basic'
 export default {
-
+  components: {
+    basic
+  },
+  data () {
+    return {
+      activeIndex: 0
+    }
+  },
+  computed: {
+    activeComponent () {
+      return basic
+    }
+  },
+  methods: {
+    handleClick (tab, event) {
+      // console.log(tab, event)
+      const { index } = tab
+      console.log(index)
+    }
+  }
 }
 </script>
 
@@ -32,7 +55,17 @@ export default {
   aside{
     width: 160px;
     height: 100%;
-    box-shadow: -2px 0px 9px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+    padding-top: 30px;
+    box-shadow: -2px 0px 9px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+    .avatar{
+      margin: 20px 0 5px
+    }
+    h2{
+      font-size: 12px;
+    }
+  }
+  main{
+    padding: 20px
   }
 }
 
