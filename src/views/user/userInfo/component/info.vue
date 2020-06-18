@@ -23,25 +23,28 @@
 
 <script>
 import basic from './basic'
+import contribute from './contribute'
+
 export default {
   components: {
-    basic
+    basic,
+    contribute
   },
   data () {
     return {
-      activeIndex: 0
+      activeIndex: 2
     }
   },
   computed: {
     activeComponent () {
-      return basic
+      return this.activeIndex === 0 ? basic : this.activeIndex === 1 ? '' : contribute
     }
   },
   methods: {
     handleClick (tab, event) {
       // console.log(tab, event)
       const { index } = tab
-      console.log(index)
+      this.activeIndex = index
     }
   }
 }
