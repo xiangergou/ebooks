@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div>
-       <el-row style="margin-bottom: 20px" v-if="showGuide">
-        <el-col :span="23">
-          <el-card shadow="hover">
-            <span v-for="(k, v) in menuSelectArr" :key="v">
-              {{k.title}} >
-            </span>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
+    <el-row  v-if="showGuide">
+      <el-col :span="23">
+        <el-card shadow="hover" class="comtent-tabs" :body-style="{ padding: '0px' }">
+          <div class="comtent-tabs">
+            <div v-for="(k, v) in menuSelectArr" :key="v" class="text item">
+              <span>{{ k.title }}</span>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
     <router-view />
   </div>
 </template>
@@ -35,6 +35,21 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.comtent-tabs{
+  display: flex;
+  line-height: 40px;
+  text-align: left;
+  padding-left: 10px;
+  box-sizing: border-box;
+  div{
+    margin-right: 10px;
+    span{
+      display: inline;
+    }
+  }
+}
+.text {
+  font-size: 14px;
+}
 </style>
