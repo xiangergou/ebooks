@@ -73,7 +73,7 @@ export default {
       // if (+key === 4) {
       //   this.$router.push({path: '/contribute'})
       // }
-      Bus.$emit('menuSelect', '子组件向兄弟组件传值')
+      // Bus.$emit('menuSelect', '子组件向兄弟组件传值')
     },
     getUserInfo () {
       const currentUser = AV.User.current()
@@ -95,13 +95,13 @@ export default {
     },
     menuItemClick (e, k, item) {
       const data = Array.prototype.slice.apply(arguments)
-      console.log(data, 'e')
       data.map(k => {
         return {
           title: k.title,
           id: k.objectId
         }
       })
+      this.$emit('menuSelect', data)
       // const menu = []
       // const argument = argum
     },

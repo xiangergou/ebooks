@@ -2,11 +2,11 @@
   <div style="background: rgb(242,242,242)">
     <el-container>
       <el-header height="320px" class="header">
-        <HomeHeader :menu="menu" />
+        <HomeHeader :menu="menu" @menuSelect="menuSelect"/>
       </el-header>
       <el-container>
         <el-main>
-          <HomeContent></HomeContent>
+          <HomeContent :menuSelectArr="menuSelectArr"></HomeContent>
         </el-main>
         <el-aside width="400px">
           <HomeAside :userInfo="userInfo" @showDrawer="showDrawer"></HomeAside>
@@ -41,7 +41,8 @@ export default {
       booksList: [],
       userInfo: {},
       showUser: false,
-      menu: []
+      menu: [],
+      menuSelectArr: []
     }
   },
   created () {
@@ -72,6 +73,10 @@ export default {
         }
       }
       return tree
+    },
+    menuSelect (e) {
+      this.menuSelectArr = e
+      console.log(e, 'ee')
     },
     getUserInfo () {
       const currentUser = AV.User.current()
