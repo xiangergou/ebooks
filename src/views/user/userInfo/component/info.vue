@@ -42,9 +42,8 @@ export default {
   },
   methods: {
     handleClick (tab, event) {
-      // console.log(tab, event)
       const { index } = tab
-      this.activeIndex = index
+      this.activeIndex = +index
     }
   }
 }

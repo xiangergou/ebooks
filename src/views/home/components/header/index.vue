@@ -21,7 +21,10 @@
         </el-submenu>
 
         <el-submenu index="5" v-if="userInfo.username" style="float:right">
-          <template slot="title">{{userInfo.username}}</template>
+          <template slot="title">
+            <span style="margin-right:10px">{{userInfo.username}}</span>
+            <el-avatar size="small" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"></el-avatar>
+          </template>
           <el-menu-item index="5-1" >个人信息</el-menu-item>
           <el-menu-item index="4" class="_el-menu-item">投稿</el-menu-item>
           <el-menu-item index="5-1" @click="logout">登出</el-menu-item>
@@ -42,7 +45,7 @@
 </template>
 
 <script>
-import { doSearch } from '@/service'
+// import { doSearch } from '@/service'
 import AV from 'leancloud-storage'
 import Bus from '@/utils/bus'
 
@@ -50,15 +53,14 @@ export default {
   name: 'homeHeader',
   data () {
     return {
-      keyWord: '',
+      keyWord: '云',
       avatar: 'https://img.alicdn.com/tfs/TB1K8CryEz1gK0jSZLeXXb9kVXa-400-400.jpg',
-      userInfo: {},
       activeIndex: '1',
-      activeIndex2: '1',
       menuList: []
     }
   },
   props: {
+    userInfo: {},
     menu: {
       type: Array,
       required: false,
@@ -74,16 +76,6 @@ export default {
       //   this.$router.push({path: '/contribute'})
       // }
       // Bus.$emit('menuSelect', '子组件向兄弟组件传值')
-    },
-    getUserInfo () {
-      const currentUser = AV.User.current()
-      if (currentUser) {
-        this.userInfo = JSON.parse(JSON.stringify(currentUser))
-        console.log(currentUser, 'currentUser')
-      // 跳到首页
-      } else {
-      // 显示注册或登录页面
-      }
     },
     login () {
       this.$router.push('/login')
@@ -106,10 +98,11 @@ export default {
       // const argument = argum
     },
     handleToSearch () {
-      console.log(this.keyWord)
-      doSearch(this.keyWord).then(res => {
-        console.log(res, 'res')
-      })
+      this.$emit('doSearch', this.keyWord)
+      // console.log(this.keyWord)
+      // doSearch(this.keyWord).then(res => {
+      //   console.log(res, 'res')
+      // })
     },
     changeType () {
       Bus.$emit('typeChage', '子组件向兄弟组件传值')

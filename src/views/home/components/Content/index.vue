@@ -6,12 +6,13 @@
           <div class="comtent-tabs">
             <div v-for="(k, v) in menuSelectArr" :key="v" class="text item">
               <span>{{ k.title }}</span>
+              <span v-show="v !== menuSelectArr.length-1"> > </span>
             </div>
           </div>
         </el-card>
       </el-col>
     </el-row>
-    <router-view />
+    <router-view :contentData="contentData" />
   </div>
 </template>
 
@@ -19,6 +20,10 @@
 export default {
   name: 'homeContent',
   props: {
+    contentData: {
+      type: Array,
+      default: () => []
+    },
     menuSelectArr: {
       type: Array,
       default: () => []

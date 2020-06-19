@@ -26,6 +26,31 @@ export function doSearch (keyword) {
   return query.find()
 }
 
+export function getData (e = {}) {
+  const { objectId } = e
+  const query = new AV.Query('armory')
+  objectId && query.containedIn('sid', [objectId])
+  query.descending('createdAt').toJSON()
+  return query.find()
+}
+
+export function searchData (e = '') {
+  const titleQuery = new AV.Query('armory')
+  titleQuery.contains('title', e)
+
+  const descQuery = new AV.Query('armory')
+  descQuery.contains('desc', e)
+
+  const authorQuery = new AV.Query('armory')
+  authorQuery.contains('author', e)
+
+  const typeQuery = new AV.Query('armory')
+  typeQuery.contains('type', e)
+
+  const query = AV.Query.or(titleQuery, descQuery, authorQuery, typeQuery)
+  return query.find()
+}
+
 // function queryWine (data) {
 //   const grapes = new AV.Query('wine')
 //   grapes.descending('createdAt')

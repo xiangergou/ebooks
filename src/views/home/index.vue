@@ -2,11 +2,11 @@
   <div style="background: rgb(242,242,242)">
     <el-container>
       <el-header height="320px" class="header">
-        <HomeHeader :menu="menu" @menuSelect="menuSelect"/>
+        <HomeHeader :menu="menu" @menuSelect="menuSelect" :userInfo="userInfo" @doSearch="doSearch" />
       </el-header>
       <el-container>
         <el-main>
-          <HomeContent :menuSelectArr="menuSelectArr"></HomeContent>
+          <HomeContent :menuSelectArr="menuSelectArr" :contentData="contentData"></HomeContent>
         </el-main>
         <el-aside width="400px">
           <HomeAside :userInfo="userInfo" @showDrawer="showDrawer"></HomeAside>
@@ -23,9 +23,10 @@
 <script>
 import { HomeHeader, HomeContent, HomeFooter, HomeAside } from './components'
 import UserInfo from '../user/userInfo'
+import { filterArray } from '@/utils/common'
 import effect from '@/utils/index'
 import AV from 'leancloud-storage'
-import { getMenu } from '@/service'
+import { getMenu, getData, searchData } from '@/service'
 
 export default {
   name: 'home',
@@ -40,49 +41,57 @@ export default {
     return {
       booksList: [],
       userInfo: {},
-      showUser: true,
+      showUser: false,
       menu: [],
+      contentData: [],
       menuSelectArr: []
     }
   },
   created () {
     effect()
-    this.getUserInfo()
 
-    getMenu().then(res => {
-      const data = JSON.parse(JSON.stringify(res))
-      this.menu = this.filterArray(data)
-      console.log(this.menu, 'this.menu')
-    })
+    this.init()
   },
   methods: {
+    init () {
+      this.getUserInfo()
+      this.getMenu()
+      this.getData()
+    },
+    getMenu () {
+      // 获取菜单
+      getMenu().then(res => {
+        const data = JSON.parse(JSON.stringify(res))
+        this.menu = filterArray(data)
+      })
+    },
+    getData (e) {
+      getData(e).then(res => {
+        const data = JSON.parse(JSON.stringify(res))
+        console.log(data, 'data')
+        this.contentData = data
+      })
+    },
     showDrawer (flag = true) {
       this.showUser = flag
     },
-    filterArray (data, pid = '') {
-      var tree = []
-      var temp
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].pid === pid) {
-          var obj = data[i]
-          temp = this.filterArray(data, data[i].objectId)
-          if (temp.length > 0) {
-            obj.subs = temp
-          }
-          tree.push(obj)
-        }
-      }
-      return tree
-    },
     menuSelect (e) {
       this.menuSelectArr = e
-      console.log(e, 'ee')
+      this.getData(e[e.length - 1])
+    },
+    doSearch (e) {
+      this.menuSelectArr = [{title: e}]
+      searchData(e).then(res => {
+        const data = JSON.parse(JSON.stringify(res))
+        console.log(data, 'res')
+        this.contentData = data
+      })
     },
     getUserInfo () {
       const currentUser = AV.User.current()
       if (currentUser) {
         this.userInfo = JSON.parse(JSON.stringify(currentUser))
-        console.log(currentUser, 'currentUser')
+        console.log(this.userInfo, 'currentUser')
       // 跳到首页
       } else {
       // 显示注册或登录页面
@@ -128,7 +137,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    background:rgba(255,255,255, 0.2);
+    background:rgba(255,255,255, 0.1);
   }
 
 .gray {
