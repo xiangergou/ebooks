@@ -48,6 +48,7 @@ export function searchData (e = '') {
   typeQuery.contains('type', e)
 
   const query = AV.Query.or(titleQuery, descQuery, authorQuery, typeQuery)
+  query.descending('createdAt').toJSON()
   return query.find()
 }
 

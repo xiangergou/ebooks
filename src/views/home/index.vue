@@ -6,7 +6,7 @@
       </el-header>
       <el-container>
         <el-main>
-          <HomeContent :menuSelectArr="menuSelectArr" :contentData="contentData"></HomeContent>
+          <HomeContent :menuSelectArr="menuSelectArr" :contentData="contentData" v-loading="loading"></HomeContent>
         </el-main>
         <el-aside width="400px">
           <HomeAside :userInfo="userInfo" @showDrawer="showDrawer"></HomeAside>
@@ -39,6 +39,7 @@ export default {
   },
   data () {
     return {
+      loading: false,
       booksList: [],
       userInfo: {},
       showUser: false,
@@ -66,7 +67,9 @@ export default {
       })
     },
     getData (e) {
+      this.loading = true
       getData(e).then(res => {
+        this.loading = false
         const data = JSON.parse(JSON.stringify(res))
         console.log(data, 'data')
         this.contentData = data
@@ -81,7 +84,9 @@ export default {
     },
     doSearch (e) {
       this.menuSelectArr = [{title: e}]
+      this.loading = true
       searchData(e).then(res => {
+        this.loading = false
         const data = JSON.parse(JSON.stringify(res))
         console.log(data, 'res')
         this.contentData = data

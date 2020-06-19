@@ -31,7 +31,7 @@
         </el-submenu>
         <el-menu-item index="5" class="_el-menu-item" v-else style="float:right" @click="login">未登录</el-menu-item>
         <el-menu-item index="3" class="_el-menu-item" style="float:right;">
-            <el-input v-model="keyWord" placeholder="请输入内容" size="mini" @keyup.enter.native="handleToSearch" />
+            <el-input v-model="keyWord" placeholder="请输入内容" size="mini" @keyup.enter.native="handleToSearch" clearable @clear="handleToSearch"/>
         </el-menu-item>
       </el-menu>
     </nav>
@@ -94,15 +94,9 @@ export default {
         }
       })
       this.$emit('menuSelect', data)
-      // const menu = []
-      // const argument = argum
     },
     handleToSearch () {
       this.$emit('doSearch', this.keyWord)
-      // console.log(this.keyWord)
-      // doSearch(this.keyWord).then(res => {
-      //   console.log(res, 'res')
-      // })
     },
     changeType () {
       Bus.$emit('typeChage', '子组件向兄弟组件传值')

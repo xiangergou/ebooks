@@ -2,7 +2,7 @@
  * @Description:
  * @LastEditors: liuxia
  * @Date: 2020-06-11 21:40:46
- * @LastEditTime: 2020-06-19 12:21:14
+ * @LastEditTime: 2020-06-19 15:44:04
 -->
 <template>
   <div class="infinite-list-wrapper">
@@ -175,7 +175,7 @@ export default {
     color: #333;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     overflow: hidden;
   }
 }
