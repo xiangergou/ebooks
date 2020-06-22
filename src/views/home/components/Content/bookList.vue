@@ -13,6 +13,7 @@
           v-infinite-scroll="load"
           infinite-scroll-disabled="disabled"
           v-for="(k, v) in contentData" :key="v"
+          @click.native="handleToDetail(k)"
           >
           <el-row :gutter="20" class="grid-content">
             <el-col :span="4">
@@ -34,16 +35,12 @@
             </el-col>
           </el-row>
           <div class="card-bottom">
-             {{transformTime(k.createdAt)}}  1条评论 {{k.likes}}人点赞
+             {{transformTime(k.createdAt)}}  10条评论 {{k.likes}}人点赞
              <span style="float:right">查看详情</span>
           </div>
         </el-card>
       </el-col>
     </el-row>
-<!--
-    <p v-if="loading">加载中...</p>
-    <p v-if="noMore">没有更多了</p> -->
-
     <el-pagination
       background
       layout="prev, pager, next"
@@ -101,6 +98,10 @@ export default {
     },
     handleChange (val) {
       console.log(val)
+    },
+    handleToDetail (e) {
+      console.log(e, 'eee')
+      this.$router.push({path: 'detail', query: {id: e.objectId}})
     }
   }
 }

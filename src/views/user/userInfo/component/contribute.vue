@@ -5,7 +5,7 @@
  * @LastEditTime: 2020-06-18 20:13:02
 -->
 <template>
-  <div>
+  <div style="overflow:auto">
     <el-form label-position="left" label-width="80px" :model="formLabelAlign">
       <el-form-item label="类型">
         <el-radio-group v-model="value" size="small">
@@ -14,27 +14,20 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="名称">
-        <el-input v-model="formLabelAlign.name"></el-input>
+        <el-input v-model="formLabelAlign.name" size="small"></el-input>
       </el-form-item>
       <el-form-item label="作者">
-        <el-input v-model="formLabelAlign.region"></el-input>
+        <el-input v-model="formLabelAlign.region" size="small"></el-input>
       </el-form-item>
-
       <el-form-item label="封面上传">
         <el-upload
-          class="upload-demo"
-          action="#"
-          :on-preview="handlePreview"
-          :before-upload="beforeUpload"
-          multiple
-          :on-exceed="handleExceed"
-          :on-change="handleSuccess"
-          :file-list="fileList">
-          <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">
-            <p>哒哒哒</p>
-            <p>封面</p>
-            </div>
+          class="avatar-uploader"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
       <el-form-item label="简介">
@@ -71,7 +64,7 @@ export default {
   data () {
     return {
       fileList: [],
-      value: '',
+      value: '2',
       options: [{
         value: '1',
         label: '试卷'
@@ -107,5 +100,22 @@ export default {
 </script>
 
 <style>
-
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
 </style>

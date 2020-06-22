@@ -25,8 +25,8 @@ export default new Router({
           component: Books
         },
         {
-          path: '/dataDetail',
-          name: 'dataDetail',
+          path: '/detail',
+          name: 'detail',
           component: () => import('@/views/home/components/Content/dataDetail')
         }
       ]

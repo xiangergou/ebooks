@@ -19,7 +19,7 @@
         <div v-for="(o, i) in codeList" :key="i">
           <el-image
             style="width: 130px; height: 130px"
-            src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+            src="https://lc-gluttony.s3.amazonaws.com/AlWeYVtSToe0/85e98990a25522edfdd8/a6x12455zlk8tb4wsmeva2c.png"
             fit="fill">
           </el-image>
           <p>{{o.title}}</p>

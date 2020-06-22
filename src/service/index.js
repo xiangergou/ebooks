@@ -52,6 +52,14 @@ export function searchData (e = '') {
   return query.find()
 }
 
+export function getDetail (id = '') {
+  console.log(id)
+  const query = new AV.Query('armory')
+  query.equalTo('objectId', id)
+  query.descending('createdAt').toJSON()
+  return query.first()
+}
+
 // function queryWine (data) {
 //   const grapes = new AV.Query('wine')
 //   grapes.descending('createdAt')

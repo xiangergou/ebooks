@@ -1,18 +1,16 @@
 <template>
   <div class="dataDetail-wrap">
     <header>
-      <h1>title</h1>
+      <h1>{{detail.title}}</h1>
       <article>
-        <span>2013-4-10</span>
-        <span>2013-4-10</span>
-        <span>2013-4-10</span>
-        <span>2013-4-10</span>
-      </article>
-      <footer>
         <el-image
           style="width: 100px; height: 100px"
           src='https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-          fit="fill"></el-image>
+          fit="fill">
+        </el-image>
+
+      </article>
+      <footer>
       </footer>
     </header>
     <article>
@@ -30,12 +28,16 @@
 </template>
 
 <script>
-// Use import
+import { getDetail } from '@/service'
 import Valine from 'valine'
-// or Use require
 
 export default {
   name: 'dataDetail',
+  created () {
+    console.log(this.$route.query)
+    const { id } = this.$route.query
+    this.init(id)
+  },
   mounted () {
     var valine = new Valine()
     valine.init({
@@ -54,6 +56,20 @@ export default {
       // requiredFields:
       // guest_info: 'nick,mail'
     })
+  },
+  data () {
+    return {
+      detail: {}
+    }
+  },
+  methods: {
+    init (id) {
+      getDetail(id).then(res => {
+        const data = JSON.parse(JSON.stringify(res))
+        console.log(data, 'data')
+        this.detail = data
+      })
+    }
   }
 }
 </script>
