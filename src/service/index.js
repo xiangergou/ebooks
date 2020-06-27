@@ -34,6 +34,13 @@ export function getData (e = {}) {
   return query.find()
 }
 
+export function getNotice () {
+  const query = new AV.Query('Community')
+  query.equalTo('type', '1')
+  query.descending('createdAt').toJSON()
+  return query.find()
+}
+
 export function searchData (e = '') {
   const titleQuery = new AV.Query('armory')
   titleQuery.contains('title', e)
@@ -53,13 +60,18 @@ export function searchData (e = '') {
 }
 
 export function getDetail (id = '') {
-  console.log(id)
   const query = new AV.Query('armory')
   query.equalTo('objectId', id)
   query.descending('createdAt').toJSON()
   return query.first()
 }
 
+// export function getDownloadUrl (id) {
+//   const query = new AV.Query('_File')
+//   query.equalTo('objectId', id)
+//   query.descending('createdAt').toJSON()
+//   return query.first()
+// }
 // function queryWine (data) {
 //   const grapes = new AV.Query('wine')
 //   grapes.descending('createdAt')

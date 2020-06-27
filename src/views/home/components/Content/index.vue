@@ -12,13 +12,19 @@
         </el-card>
       </el-col>
     </el-row>
-    <router-view :contentData="contentData" />
+
+    <article-list :contentData="contentData"/>
   </div>
 </template>
 
 <script>
+import articleList from './components/content'
+
 export default {
   name: 'homeContent',
+  components: {
+    articleList
+  },
   props: {
     contentData: {
       type: Array,

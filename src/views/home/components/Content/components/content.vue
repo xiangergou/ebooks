@@ -2,74 +2,45 @@
  * @Description:
  * @LastEditors: liuxia
  * @Date: 2020-06-11 21:40:46
- * @LastEditTime: 2020-06-11 21:42:13
+ * @LastEditTime: 2020-06-27 18:23:01
 -->
 <template>
   <div class="infinite-list-wrapper">
-    <el-row style="margin-bottom: 20px" v-if="showGuide">
-      <el-col :span="23">
-        <el-card shadow="hover">
-          总是显示
-        </el-card>
-      </el-col>
-    </el-row>
     <el-row>
       <el-col :span="23" >
-          <el-card
+        <el-card
           shadow="hover"
-          v-infinite-scroll="load"  infinite-scroll-disabled="disabled"
-        >
+          v-infinite-scroll="load"
+          infinite-scroll-disabled="disabled"
+          v-for="(k, v) in contentData" :key="v"
+          @click.native="handleToDetail(k)"
+          >
           <el-row :gutter="20" class="grid-content">
             <el-col :span="4">
-              <div class="grid-img bg-purple">
+              <div class="grid-img">
                 <el-image
-                  src="https://www.sanqiu.cc/wp-content/uploads/2020/05/1590884904-20200424022716.jpg"
+                  :src="k.avatar"
                   fit="contain">
                 </el-image>
               </div>
             </el-col>
-            <el-col :span="20">
+            <el-col :span="19" :offset="1">
               <div>
                 <main>
-                  <aside>留下书屋~</aside>
-                  <h2>牛奶可乐经济学套装（全四册) 【罗伯特·弗兰克】epub+mobi+azw3</h2>
+                  <aside>{{k.type}}</aside>
+                  <h2>{{k.title}}（全四册) 【{{k.author}}】</h2>
                 </main>
-                <article>《牛奶可乐经济学》：《牛奶可乐经济学》是用经济学的原理和方法来解释我们在现实中司空见惯而又未注意到的现象，并通过这些事例和解释来加深人们对经济学的理解。比如，为什么牛奶……</article>
+                <article>《{{k.title}}》：{{k.desc}}</article>
               </div>
             </el-col>
           </el-row>
           <div class="card-bottom">
-             2020年5月31日  1条评论 4人点赞  三秋
+             {{transformTime(k.createdAt)}}  10条评论 {{k.likes}}人点赞
+             <span style="float:right">查看详情</span>
           </div>
         </el-card>
-        <!-- <el-card
-          shadow="hover"
-          v-infinite-scroll="load"  infinite-scroll-disabled="disabled"
-          v-for="(k, v) in booksList" :key="v"
-        >
-          <el-row :gutter="20">
-            <el-col :span="4">
-              <div class="grid-img">
-                <el-image
-                  src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-                  fit="contain">
-                </el-image>
-              </div>
-            </el-col>
-            <el-col :span="20">
-              <div class="grid-content bg-purple">
-                <h2>{{k.title}}</h2>
-                <p>{{k.desc}}</p>
-              </div>
-            </el-col>
-          </el-row>
-        </el-card> -->
       </el-col>
     </el-row>
-<!--
-    <p v-if="loading">加载中...</p>
-    <p v-if="noMore">没有更多了</p> -->
-
     <el-pagination
       background
       layout="prev, pager, next"
@@ -80,9 +51,16 @@
 
 <script>
 import { getBooks } from '@/service'
+import { transformTime } from '@/utils/common'
 
 export default {
   name: 'homeContent',
+  props: {
+    contentData: {
+      type: Array,
+      default: () => []
+    }
+  },
   data () {
     return {
       count: 10,
@@ -93,6 +71,9 @@ export default {
     }
   },
   computed: {
+    transformTime () {
+      return transformTime
+    },
     noMore () {
       return this.count >= 10
     },
@@ -117,6 +98,10 @@ export default {
     },
     handleChange (val) {
       console.log(val)
+    },
+    handleToDetail (e) {
+      console.log(e, 'eee')
+      this.$router.push({path: 'detail', query: {id: e.objectId}})
     }
   }
 }
@@ -124,9 +109,12 @@ export default {
 
 <style lang="scss" scoped>
 .grid-img{
-  width: 100%;
+  width: 100px;
   border: 1px solid #ccc;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img{
     width: 100%;
     height: 100%;
@@ -186,6 +174,10 @@ export default {
     font-size: 15px;
     font-weight: 300;
     color: #333;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
   }
 }
 .card-bottom{

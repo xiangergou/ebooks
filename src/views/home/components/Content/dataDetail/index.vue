@@ -21,8 +21,7 @@
       <h2>{{detail.desc}}</h2>
     </article>
     <aside>
-      下载
-      打赏
+      <el-button type="success" @click="downLoad">下载</el-button>
     </aside>
     <footer id="common" class="dataDetail-footer" ref="footer">
       评论
@@ -31,15 +30,21 @@
 </template>
 
 <script>
-import { getDetail } from '@/service'
+import { getDetail, getDownloadUrl } from '@/service'
 import Valine from 'valine'
 import { transformTime } from '@/utils/common'
 
 export default {
   name: 'dataDetail',
+  data () {
+    return {
+      id: null,
+      detail: {}
+    }
+  },
   created () {
-    console.log(this.$route.query)
     const { id } = this.$route.query
+    this.id = id
     this.init(id)
   },
   mounted () {
@@ -61,11 +66,6 @@ export default {
       // guest_info: 'nick,mail'
     })
   },
-  data () {
-    return {
-      detail: {}
-    }
-  },
   computed: {
     transformTime () {
       return transformTime
@@ -78,6 +78,11 @@ export default {
         console.log(data, 'data')
         this.detail = data
       })
+    },
+    downLoad () {
+      // getDownloadUrl().then(res => {
+      //   console.log(res, 'res')
+      // })
     }
   }
 }

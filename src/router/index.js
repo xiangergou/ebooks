@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from '@/views/home'
 import Contribute from '@/views/user/upload'
 import Login from '@/views/login'
-import Books from '@/views/home/components/Content/bookList'
 
 Vue.use(Router)
 
@@ -17,13 +16,7 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home,
-      redirect: '/books',
       children: [
-        {
-          path: '/books',
-          name: 'books',
-          component: Books
-        },
         {
           path: '/detail',
           name: 'detail',

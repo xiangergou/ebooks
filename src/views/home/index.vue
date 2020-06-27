@@ -26,7 +26,7 @@ import UserInfo from '../user/userInfo'
 import { filterArray } from '@/utils/common'
 import effect from '@/utils/index'
 import AV from 'leancloud-storage'
-import { getMenu, getData, searchData } from '@/service'
+import { getMenu, getNotice, searchData } from '@/service'
 
 export default {
   name: 'home',
@@ -57,7 +57,7 @@ export default {
     init () {
       this.getUserInfo()
       this.getMenu()
-      this.getData()
+      this.getHomeData()
     },
     getMenu () {
       // 获取菜单
@@ -66,9 +66,9 @@ export default {
         this.menu = filterArray(data)
       })
     },
-    getData (e) {
+    getHomeData (e) {
       this.loading = true
-      getData(e).then(res => {
+      getNotice(e).then(res => {
         this.loading = false
         const data = JSON.parse(JSON.stringify(res))
         console.log(data, 'data')
