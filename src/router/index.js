@@ -10,13 +10,27 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/books'
+      redirect: '/home',
+      component: Home,
+      children: [
+        {
+          path: '/notice',
+          name: 'notice',
+          component: () => import('@/views/home/components/Content/notice')
+        },
+        {
+          path: '/detail',
+          name: 'detail',
+          component: () => import('@/views/home/components/Content/dataDetail')
+        }
+      ]
     },
     {
       path: '/home',
       name: 'home',
       component: Home,
       children: [
+
         {
           path: '/detail',
           name: 'detail',

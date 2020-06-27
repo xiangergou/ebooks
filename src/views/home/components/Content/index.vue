@@ -13,18 +13,15 @@
       </el-col>
     </el-row>
 
-    <article-list :contentData="contentData"/>
+    <router-view :contentData="contentData" />
+
+    <!-- <article-list :contentData="contentData"/> -->
   </div>
 </template>
 
 <script>
-import articleList from './components/content'
-
 export default {
   name: 'homeContent',
-  components: {
-    articleList
-  },
   props: {
     contentData: {
       type: Array,
