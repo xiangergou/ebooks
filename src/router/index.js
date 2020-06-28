@@ -14,8 +14,8 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: '/notice',
-          name: 'notice',
+          path: '/home',
+          name: 'home',
           component: () => import('@/views/home/components/Content/notice')
         },
         {
