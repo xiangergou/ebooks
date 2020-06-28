@@ -2,7 +2,7 @@
  * @Description:
  * @LastEditors: liuxia
  * @Date: 2020-06-27 18:37:11
- * @LastEditTime: 2020-06-28 10:20:55
+ * @LastEditTime: 2020-06-28 17:35:07
 -->
 <template>
   <div class="infinite-list-wrapper">
@@ -93,7 +93,7 @@ export default {
     },
     handleToDetail (e) {
       console.log(e, 'eee')
-      this.$router.push({path: 'detail', query: {id: e.objectId}})
+      this.$router.push({path: 'detail', query: {id: e.objectId, type: 1}})
     }
   }
 }
@@ -119,6 +119,7 @@ export default {
   main{
     font-weight: normal;
     line-height: 1.1;
+    text-align: center;
     aside{
       display: inline-block;
       padding: 4px 6px;

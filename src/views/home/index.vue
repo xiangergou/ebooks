@@ -1,7 +1,7 @@
 <template>
   <div style="background: rgb(242,242,242)">
     <el-container>
-      <el-header height="320px" class="header">
+      <el-header height="50vh" class="header">
         <HomeHeader :menu="menu" @menuSelect="menuSelect" :userInfo="userInfo" @doSearch="doSearch" />
       </el-header>
       <el-container>
@@ -137,7 +137,7 @@ export default {
   }
   .header::after{
     width: 100%;
-    height: 320px;
+    height: 50vh;
     content: "";
     position: absolute;
     top: 0;
@@ -145,10 +145,10 @@ export default {
     background:rgba(255,255,255, 0.1);
   }
 
-.gray {
-  filter: grayscale(100%);
-  filter: gray;
-}
+  .gray {
+    filter: grayscale(100%);
+    filter: gray;
+  }
   .header{
     position: relative;
     padding: 0;

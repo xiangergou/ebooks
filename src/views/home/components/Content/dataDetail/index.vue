@@ -39,12 +39,14 @@ export default {
   data () {
     return {
       id: null,
-      detail: {}
+      detail: {},
+      type: 1 // 1公告 2内容
     }
   },
   created () {
-    const { id } = this.$route.query
+    const { id, type } = this.$route.query
     this.id = id
+    this.type = type
     this.init(id)
   },
   mounted () {
@@ -58,7 +60,6 @@ export default {
       placeholder: '说说',
       path: 'window.location.pathname',
       // avatar: 'wavatar',
-      nick: '轻语1',
       lang: 'zh-CN',
       enableQQ: true,
       meta: ['nick', 'mail']
