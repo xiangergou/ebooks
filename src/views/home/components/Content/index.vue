@@ -12,7 +12,10 @@
         </el-card>
       </el-col>
     </el-row>
+
     <router-view :contentData="contentData" />
+
+    <!-- <article-list :contentData="contentData"/> -->
   </div>
 </template>
 

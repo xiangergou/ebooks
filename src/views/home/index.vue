@@ -1,7 +1,7 @@
 <template>
   <div style="background: rgb(242,242,242)">
     <el-container>
-      <el-header height="320px" class="header">
+      <el-header height="50vh" class="header">
         <HomeHeader :menu="menu" @menuSelect="menuSelect" :userInfo="userInfo" @doSearch="doSearch" />
       </el-header>
       <el-container>
@@ -26,7 +26,7 @@ import UserInfo from '../user/userInfo'
 import { filterArray } from '@/utils/common'
 import effect from '@/utils/index'
 import AV from 'leancloud-storage'
-import { getMenu, searchData } from '@/service'
+import { getMenu, getNotice, searchData } from '@/service'
 
 export default {
   name: 'home',
@@ -57,7 +57,7 @@ export default {
     init () {
       this.getUserInfo()
       this.getMenu()
-      this.getData()
+      // this.getHomeData()
     },
     getMenu () {
       // 获取菜单
@@ -75,6 +75,15 @@ export default {
         // this.booksList.push(...res.data)
       }).catch(err => {
         console.log(err)
+      })
+    },
+    getHomeData (e) {
+      this.loading = true
+      getNotice(e).then(res => {
+        this.loading = false
+        const data = JSON.parse(JSON.stringify(res))
+        console.log(data, 'data')
+        this.contentData = data
       })
       // getData(e).then(res => {
       //   this.loading = false
@@ -145,7 +154,7 @@ export default {
   }
   .header::after{
     width: 100%;
-    height: 320px;
+    height: 50vh;
     content: "";
     position: absolute;
     top: 0;
@@ -153,10 +162,10 @@ export default {
     background:rgba(255,255,255, 0.1);
   }
 
-.gray {
-  filter: grayscale(100%);
-  filter: gray;
-}
+  .gray {
+    filter: grayscale(100%);
+    filter: gray;
+  }
   .header{
     position: relative;
     padding: 0;

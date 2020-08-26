@@ -6,7 +6,7 @@
         class="el-menu"
         mode="horizontal"
         show-timeout="200">
-        <el-menu-item index="1" class="_el-menu-item" >首页</el-menu-item>
+        <el-menu-item index="1" class="_el-menu-item" @click="toHome">首页</el-menu-item>
 
         <el-submenu :index="k.objectId + ''" v-for="k in menu" :key="k.objectId" disabled="true">
           <template slot="title"> {{k.title}} </template>
@@ -30,7 +30,7 @@
           <el-menu-item index="5-1" @click="logout">登出</el-menu-item>
         </el-submenu>
         <el-menu-item index="5" class="_el-menu-item" v-else style="float:right" @click="login">未登录</el-menu-item>
-        <el-menu-item index="3" class="_el-menu-item" style="float:right;">
+        <el-menu-item index="3" class="_el-menu-item searchbox">
             <el-input v-model="keyWord" placeholder="请输入内容" size="mini" @keyup.enter.native="handleToSearch" clearable @clear="handleToSearch" disabled="true"/>
         </el-menu-item>
       </el-menu>
@@ -76,6 +76,9 @@ export default {
       //   this.$router.push({path: '/contribute'})
       // }
       // Bus.$emit('menuSelect', '子组件向兄弟组件传值')
+    },
+    toHome () {
+      this.$router.push('/home')
     },
     login () {
       this.$router.push('/login')
@@ -152,6 +155,9 @@ export default {
         font-family: FangSong;
       }
     }
+  }
+  .searchbox{
+    float: right;
   }
 }
 
