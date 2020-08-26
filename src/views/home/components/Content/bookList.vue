@@ -7,51 +7,63 @@
 <template>
   <div class="infinite-list-wrapper">
     <el-row>
-      <el-col :span="23" >
-        <el-card
-          shadow="hover"
-          v-infinite-scroll="load"
-          infinite-scroll-disabled="disabled"
-          v-for="(k, v) in contentData" :key="v"
-          @click.native="handleToDetail(k)"
+      <el-collapse v-model="activeNames" @change="handleChange">
+        <el-collapse-item
+          :title="`当日新更: ${formatDate(+item.createDate, 'yyyy-MM-dd') } 提取码：${item.sharePwd}`" :name="i"
+          v-for="(item, i) in contentData" :key="i"
           >
-          <el-row :gutter="20" class="grid-content">
-            <el-col :span="4">
-              <div class="grid-img">
-                <el-image
-                  :src="k.avatar"
-                  fit="contain">
-                </el-image>
+          <div class="collapse-item">
+            <el-card
+              shadow="hover"
+              v-infinite-scroll="load"
+              infinite-scroll-disabled="disabled"
+              v-for="(k, v) in item.data" :key="'item' + v"
+              @click.native="handleToDetail(item.shareLink)"
+              >
+              <el-row :gutter="20" class="grid-content">
+                <el-col :span="4">
+                  <div class="grid-img">
+                    <el-image
+                      :src="k.avatar"
+                      fit="contain">
+                    </el-image>
+                  </div>
+                </el-col>
+                <el-col :span="19" :offset="1">
+                  <div>
+                    <main>
+                      <aside>{{k.type}}</aside>
+                      <h2>{{k.title}} 【{{k.author}}】</h2>
+                    </main>
+                    <article>
+                      《{{k.title}}》: {{k.desc}}
+                    </article>
+                  </div>
+                </el-col>
+              </el-row>
+              <div class="card-bottom">
+                {{transformTime(k.createdAt)}}
+                <span style="float:right">
+                  <el-popover
+                    placement="top-start"
+                    trigger="hover"
+                    width="400"
+                    :content="k.desc">
+                    <div slot="reference">查看详情</div>
+                  </el-popover>
+                </span>
               </div>
-            </el-col>
-            <el-col :span="19" :offset="1">
-              <div>
-                <main>
-                  <aside>{{k.type}}</aside>
-                  <h2>{{k.title}}（全四册) 【{{k.author}}】</h2>
-                </main>
-                <article>《{{k.title}}》：{{k.desc}}</article>
-              </div>
-            </el-col>
-          </el-row>
-          <div class="card-bottom">
-             {{transformTime(k.createdAt)}}  10条评论 {{k.likes}}人点赞
-             <span style="float:right">查看详情</span>
+            </el-card>
           </div>
-        </el-card>
-      </el-col>
+        </el-collapse-item>
+      </el-collapse>
     </el-row>
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="1000">
-    </el-pagination>
   </div>
 </template>
 
 <script>
-import { getBooks } from '@/service'
-import { transformTime } from '@/utils/common'
+// import { getBooks } from '@/service'
+import { transformTime, formatDate } from '@/utils/common'
 
 export default {
   name: 'homeContent',
@@ -65,7 +77,7 @@ export default {
     return {
       count: 10,
       loading: false,
-      activeNames: ['1'],
+      activeNames: [0],
       booksList: [],
       showGuide: false
     }
@@ -73,6 +85,9 @@ export default {
   computed: {
     transformTime () {
       return transformTime
+    },
+    formatDate () {
+      return formatDate
     },
     noMore () {
       return this.count >= 10
@@ -82,26 +97,32 @@ export default {
     }
   },
   created () {
-    getBooks().then(res => {
-      console.log(JSON.parse(JSON.stringify(res)), 'res')
-      const data = JSON.parse(JSON.stringify(res))
-      this.booksList.push(...data)
-    })
+    // this.$axios.get('/static/data.json').then(res => {
+    //   this.booksList.push(...res.data)
+    // }).catch(err => {
+    //   console.log(err)
+    // })
+    // getBooks().then(res => {
+    //   console.log(JSON.parse(JSON.stringify(res)), 'res')
+    //   const data = JSON.parse(JSON.stringify(res))
+    //   this.booksList.push(...data)
+    // })
   },
   methods: {
     load () {
-      this.loading = true
-      setTimeout(() => {
-        this.count += 2
-        this.loading = false
-      }, 2000)
+      // this.loading = true
+      // setTimeout(() => {
+      //   this.count += 2
+      //   this.loading = false
+      // }, 2000)
     },
     handleChange (val) {
       console.log(val)
     },
     handleToDetail (e) {
-      console.log(e, 'eee')
-      this.$router.push({path: 'detail', query: {id: e.objectId}})
+      window.open(e, '_blank')
+      // window.location = 'http://www.baidu.com'
+      // window.open(e, '_blank')
     }
   }
 }
@@ -109,7 +130,7 @@ export default {
 
 <style lang="scss" scoped>
 .grid-img{
-  width: 100px;
+  // width: 100px;
   border: 1px solid #ccc;
   height: 100%;
   display: flex;
@@ -192,6 +213,8 @@ export default {
   background: rgba(253,253,253,.7);
   text-align: left;
 }
+.footer{
+}
 </style>
 
 <style >
@@ -206,5 +229,8 @@ export default {
 }
 .el-card__body{
   padding-bottom: 0;
+}
+.el-collapse-item__header{
+  padding-left: 20px;
 }
 </style>

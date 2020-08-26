@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.20.0",
     "element-ui": "^2.13.2",
     "leancloud-storage": "^4.6.0",
     "valine": "^1.4.14",

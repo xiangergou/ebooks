@@ -5,25 +5,27 @@
         <img src="https://img.alicdn.com/tfs/TB1K8CryEz1gK0jSZLeXXb9kVXa-400-400.jpg" alt="">
       </div>
       <aside>
-        <h3>{{userInfo.username || 'name'}}</h3>
-        <span>以前看见山，总想知道山后面是什么</span>
+        <h3>{{userInfo.username || '轻语'}}</h3>
+        <span>以前看见山，总想知道山后面是什么。</span>
       </aside>
     </el-card>
     <el-card class="box-card" shadow="hover" style="padding-top:10px">
       <div slot="header">
         <span>
-          您的小小赞助会让在下更有动力投入书籍更新。谢谢。
+          轻语 • 自修室
+          <!-- 您的小小赞助会让在下更有动力投入书籍更新。谢谢。 -->
         </span>
       </div>
       <footer class="codeListBox" style="margin-top:20px">
-        <div v-for="(o, i) in codeList" :key="i">
+        你背单词时，阿拉斯加的鳕鱼正跃出水面；你算数学时，太平洋彼岸的海鸥振翅掠过城市上空；你晚自习时，极圈上的夜空散漫了五彩斑斓；但是少年你别着急，在你为自己未来踏踏实实地努力时，那些你感觉从来不会看到的景色，那些你觉得终身不会遇到的人，正一步步向你走来。
+        <!-- <div v-for="(o, i) in codeList" :key="i">
           <el-image
             style="width: 130px; height: 130px"
             src="https://lc-gluttony.s3.amazonaws.com/AlWeYVtSToe0/85e98990a25522edfdd8/a6x12455zlk8tb4wsmeva2c.png"
             fit="fill">
           </el-image>
           <p>{{o.title}}</p>
-        </div>
+        </div> -->
       </footer>
     </el-card>
   </div>
@@ -108,6 +110,13 @@ export default {
         margin: 0 auto;
       }
     }
+  }
+  .codeListBox{
+    padding: 0 30px;
+    font-size: 14px;
+    text-align: left;
+    font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 24px;
   }
 }
 

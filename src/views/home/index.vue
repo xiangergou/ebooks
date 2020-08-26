@@ -26,7 +26,7 @@ import UserInfo from '../user/userInfo'
 import { filterArray } from '@/utils/common'
 import effect from '@/utils/index'
 import AV from 'leancloud-storage'
-import { getMenu, getData, searchData } from '@/service'
+import { getMenu, searchData } from '@/service'
 
 export default {
   name: 'home',
@@ -67,13 +67,21 @@ export default {
       })
     },
     getData (e) {
-      this.loading = true
-      getData(e).then(res => {
-        this.loading = false
-        const data = JSON.parse(JSON.stringify(res))
-        console.log(data, 'data')
-        this.contentData = data
+      // this.loading = true
+      this.$axios.get('/static/data.json').then(res => {
+        console.log(res, 'res')
+
+        this.contentData = res.data
+        // this.booksList.push(...res.data)
+      }).catch(err => {
+        console.log(err)
       })
+      // getData(e).then(res => {
+      //   this.loading = false
+      //   const data = JSON.parse(JSON.stringify(res))
+      //   console.log(data, 'data')
+      //   this.contentData = data
+      // })
     },
     showDrawer (flag = true) {
       this.showUser = flag
