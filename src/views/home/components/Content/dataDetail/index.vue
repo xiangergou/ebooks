@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getDetail, getDownloadUrl } from '@/service'
+// import { getDetail, getDownloadUrl } from '@/service'
 import Valine from 'valine'
 import { transformTime } from '@/utils/common'
 
@@ -74,11 +74,11 @@ export default {
   },
   methods: {
     init (id) {
-      getDetail(id).then(res => {
-        const data = JSON.parse(JSON.stringify(res))
-        console.log(data, 'data')
-        this.detail = data
-      })
+      // getDetail(id).then(res => {
+      //   const data = JSON.parse(JSON.stringify(res))
+      //   console.log(data, 'data')
+      //   this.detail = data
+      // })
     },
     downLoad () {
       // getDownloadUrl().then(res => {

@@ -57,7 +57,7 @@ export default {
     init () {
       this.getUserInfo()
       this.getMenu()
-      // this.getHomeData()
+      this.getData()
     },
     getMenu () {
       // 获取菜单
@@ -78,13 +78,13 @@ export default {
       })
     },
     getHomeData (e) {
-      this.loading = true
-      getNotice(e).then(res => {
-        this.loading = false
-        const data = JSON.parse(JSON.stringify(res))
-        console.log(data, 'data')
-        this.contentData = data
-      })
+      // this.loading = true
+      // getNotice(e).then(res => {
+      //   this.loading = false
+      //   const data = JSON.parse(JSON.stringify(res))
+      //   console.log(data, 'data')
+      //   this.contentData = data
+      // })
       // getData(e).then(res => {
       //   this.loading = false
       //   const data = JSON.parse(JSON.stringify(res))

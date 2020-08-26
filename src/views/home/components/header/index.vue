@@ -8,7 +8,7 @@
         show-timeout="200">
         <el-menu-item index="1" class="_el-menu-item" @click="toHome">首页</el-menu-item>
 
-        <el-submenu :index="k.objectId + ''" v-for="k in menu" :key="k.objectId" disabled="true">
+        <el-submenu :index="k.objectId + ''" v-for="k in menu" :key="k.objectId" :disabled="true">
           <template slot="title"> {{k.title}} </template>
           <span v-for="item in k.subs" :key="item.objectId">
             <el-submenu :index="item.objectId + ''"  v-if="item.subs && item.subs.length > 0" :key="item.objectId">
@@ -31,7 +31,7 @@
         </el-submenu>
         <el-menu-item index="5" class="_el-menu-item" v-else style="float:right" @click="login">未登录</el-menu-item>
         <el-menu-item index="3" class="_el-menu-item searchbox">
-            <el-input v-model="keyWord" placeholder="请输入内容" size="mini" @keyup.enter.native="handleToSearch" clearable @clear="handleToSearch" disabled="true"/>
+            <el-input v-model="keyWord" placeholder="请输入内容" size="mini" @keyup.enter.native="handleToSearch" clearable @clear="handleToSearch" :disabled="true"/>
         </el-menu-item>
       </el-menu>
     </nav>

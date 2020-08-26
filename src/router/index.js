@@ -19,25 +19,30 @@ export default new Router({
           component: () => import('@/views/home/components/Content/notice')
         },
         {
-          path: '/detail',
-          name: 'detail',
-          component: () => import('@/views/home/components/Content/dataDetail')
+          path: '/books',
+          name: 'books',
+          component: () => import('@/views/home/components/Content/books')
         }
+        // {
+        //   path: '/books',
+        //   name: 'books',
+        //   component: () => import('@/views/home/components/Content/components/books')
+        // }
       ]
     },
-    {
-      path: '/home',
-      name: 'home',
-      component: Home,
-      children: [
+    // {
+    //   path: '/home',
+    //   name: 'home',
+    //   component: Home,
+    //   children: [
 
-        {
-          path: '/detail',
-          name: 'detail',
-          component: () => import('@/views/home/components/Content/dataDetail')
-        }
-      ]
-    },
+    //     {
+    //       path: '/detail',
+    //       name: 'detail',
+    //       component: () => import('@/views/home/components/Content/dataDetail')
+    //     }
+    //   ]
+    // },
     {
       path: '/contribute',
       name: 'contribute',
