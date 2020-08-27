@@ -42,7 +42,7 @@
                 </el-col>
               </el-row>
               <div class="card-bottom">
-                {{transformTime(k.createdAt)}}
+                <!-- {{transformTime(k.createdAt)}} -->
                 <span style="float:right">
                   <el-popover
                     placement="top-start"
@@ -77,7 +77,7 @@ export default {
     return {
       count: 10,
       loading: false,
-      activeNames: [0],
+      activeNames: [1],
       booksList: [],
       showGuide: false
     }

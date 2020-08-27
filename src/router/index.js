@@ -16,33 +16,16 @@ export default new Router({
         {
           path: '/home',
           name: 'home',
-          component: () => import('@/views/home/components/Content/notice')
+          component: () => import('@/views/home/components/Content/books')
+          // component: () => import('@/views/home/components/Content/notice')
         },
         {
           path: '/books',
           name: 'books',
           component: () => import('@/views/home/components/Content/books')
         }
-        // {
-        //   path: '/books',
-        //   name: 'books',
-        //   component: () => import('@/views/home/components/Content/components/books')
-        // }
       ]
     },
-    // {
-    //   path: '/home',
-    //   name: 'home',
-    //   component: Home,
-    //   children: [
-
-    //     {
-    //       path: '/detail',
-    //       name: 'detail',
-    //       component: () => import('@/views/home/components/Content/dataDetail')
-    //     }
-    //   ]
-    // },
     {
       path: '/contribute',
       name: 'contribute',

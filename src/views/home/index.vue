@@ -26,7 +26,7 @@ import UserInfo from '../user/userInfo'
 import { filterArray } from '@/utils/common'
 import effect from '@/utils/index'
 import AV from 'leancloud-storage'
-import { getMenu, getNotice, searchData } from '@/service'
+import { getMenu, searchData } from '@/service'
 
 export default {
   name: 'home',
