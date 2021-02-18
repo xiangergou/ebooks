@@ -36,7 +36,7 @@
                       <h2>{{k.title}} 【{{k.author}}】</h2>
                     </main>
                     <article>
-                      《{{k.title}}》: {{k.desc}}
+                      {{k.desc}}
                     </article>
                   </div>
                 </el-col>
@@ -77,7 +77,7 @@ export default {
     return {
       count: 10,
       loading: false,
-      activeNames: [1],
+      activeNames: [0],
       booksList: [],
       showGuide: false
     }

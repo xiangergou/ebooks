@@ -1,9 +1,3 @@
-/*
- * @Author: liuxia
- * @Date: 2019-01-11 16:01:32
- * @Last Modified by: liuxia
- * @Last Modified time: 2020-08-26 10:18:10
- */
 
 <template>
   <div class="login-container">
